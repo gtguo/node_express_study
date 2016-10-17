@@ -1,12 +1,7 @@
 var express = require('express');
+var fortune = require('./lib/fortune');
 var app = express();
-var fortunes = [
-    "Conquer your fears or they will Conquer you.",
-    "Rivers need spring.",
-    "Do not fear what you don't know.",
-    "You will have a pleasant surprise.",
-    "Whenever possible, keep it simple."
-]
+
 //设置视图模板引擎
 var handlebars = require('express3-handlebars')
                  .create({ defaultLayout:'main' } );
@@ -26,9 +21,8 @@ app.get('/',function(req,res){
 })
 
 app.get('/about',function(req,res){
-    //math.randm产生一个0～1之间端随机数，math.floor产生一个最接近浮点数的整数，值小于等于浮点数
-    var randonFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-    res.render('about',{fortuneggt:randonFortune});
+    //math.randm产生一个0～1之间端随机数，math.floor产生一个最接近浮点数的整数，值小于等于浮点数    
+    res.render('about',{fortuneggt:fortune.getFortunes()});
     //res.type('text/plain');
     //res.send('About Meadowlark Travel');
 })
